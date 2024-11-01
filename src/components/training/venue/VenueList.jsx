@@ -28,9 +28,9 @@ export default function VenueList(){
         <td>{eachVenue.isVenueAC ? "AC" :"NON-AC" }</td>
         <td>{eachVenue.venueCity}</td>     
         <td>{eachVenue.venueState}</td>
-        <td><button type="button" className="btn btn-primary" onClick={()=>handleView(eachVenue.venueId)}>VIEW</button></td>
-        <td><button type="button" className="btn btn-primary" onClick={()=>handleEdit(eachVenue.venueId)}>EDIT</button></td>
-        <td><button type="button" className="btn btn-primary" onClick={()=>handleDelete(eachVenue.venueId)}>DELETE</button></td>
+        <td><button type="button" className="btn btn-primary" onClick={()=>handleView(eachVenue.venueId)}><i className="bi bi-eye fs-4"></i></button></td>
+        <td><button type="button" className="btn btn-primary" onClick={()=>handleEdit(eachVenue.venueId)}><i className="bi bi-pencil-square fs-4"></i></button></td>
+        <td><button type="button" className="btn btn-primary" onClick={()=>handleDelete(eachVenue.venueId)}><i className="bi bi-trash fs-4"></i></button></td>
     </tr>
     );
 

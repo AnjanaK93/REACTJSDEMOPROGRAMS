@@ -28,6 +28,9 @@ import HeaderApp from './components/HeaderApp'
 import VenueList from './components/training/venue/VenueList'
 import CohortList from './components/training/cohort/CohortList'
 import HeaderTraining from './components/training/HeaderTraining'
+import VenueAdd from './components/training/venue/VenueAdd'
+import CohortView from './components/training/cohort/CohortView'
+import CohortAdd  from './components/training/cohort/CohortAdd'
 //import './App.css'
 
 function App() {
@@ -56,6 +59,7 @@ function App() {
      {/* <ToDoList></ToDoList> */}
      {/* <VenueList></VenueList>
      <CohortList></CohortList> */}
+     {/* <VenueAdd></VenueAdd> */}
      
      <BrowserRouter>
      {/* <HeaderTraining></HeaderTraining> */}
@@ -69,7 +73,10 @@ function App() {
       <Route path='/cohort' element={<CohortList/>}></Route> */}
       <Route path='/training' element={<HeaderTraining/>}>
         <Route path='venue-list' element={<VenueList/>}></Route>
+        <Route path='venue-add' element={<VenueAdd/>}></Route>
         <Route path='cohort-list' element={<CohortList/>}></Route>
+        <Route path='cohort-add' element={<CohortAdd/>}></Route>
+        <Route path='cohort-view/:cid' element={<CohortView/>}></Route>
       </Route>
       <Route path="/*" element={<Error/>}></Route>
      </Routes>
