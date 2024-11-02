@@ -1,83 +1,73 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function CohortList(){
+function CohortListHttp(){
+    const baseUrl="http://localhost:3000/cohorts";
     const [searchstack,setSearchStack]=useState(" ");
     const navigate=useNavigate(); //created for programmatic navigation
-    
-    const[allCohorts,setAllCohorts]=useState([
-       {
-        cohortId:101,
-        cohortSize:26,
-        cohortVenueId:0,
-        cohortStack:"Java Full Stack",
-        cohortStartDate:new Date("2024-12-12"),
-        cohortDurationWeeks:6,
-        cohortSPOC:"",
-        cohortInstructor:""
-       } ,
-       {
-        cohortId:201,
-        cohortSize:30,
-        cohortVenueId:101,
-        cohortStack:"Python Full Stack",
-        cohortStartDate:new Date("2024-12-12"),
-        cohortDurationWeeks:6,
-        cohortSPOC:"",
-        cohortInstructor:""
-       } 
-    ]);
+    const[allCohorts,setAllCohorts]=useState([]);
     const[filteredAllCohorts,setFilteredAllCohorts]=useState([...allCohorts]);
+    const [allVenues,setAllVenues] =useState([]);
 
-    const [allVenues,setAllVenues] =useState([
-        {
-            venueId:101,
-            venueName:"Pallavas",
-            venueSeater:30,
-            isVenueAC:true,
-            venueCity:"Trivandrum",
-            venueState:"Kerala"
-        }
-    ]);
+    
+
+    function loadAllCohorts(){
+       fetch(baseUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        setAllCohorts([...data]);
+        setFilteredAllCohorts([...data]);
+        console.log(data);
+      });
+    }
+
+    useEffect(()=>{
+        //here use fetch api
+        loadAllCohorts();
+    },[]);
 
     
 
     let mappedAllCohorts=filteredAllCohorts.map((eachCohort)=>(
-        <tr key={eachCohort.cohortId}>
-            <td>{eachCohort.cohortId}</td>
+        <tr key={eachCohort.id}>
+            <td>{eachCohort.id}</td>
             <td>{eachCohort.cohortStack}</td>
             <td>{eachCohort.cohortSize}</td>
             <td>{eachCohort.cohortVenueId==0 ?(<button className="btn btn-success">MAP</button>):(eachCohort.cohortVenueId)}</td>   
-            <td>{eachCohort.cohortStartDate.toLocaleDateString()}</td>
+            <td>{eachCohort.cohortStartDate}</td>
             <td>{eachCohort.cohortDurationWeeks}</td>
-            <td>
-                {addDays(
+            {/* <td> */}
+                {/* {addDays(
                 eachCohort.cohortStartDate,
                 eachCohort.cohortDurationWeeks * 7
-                ).toLocaleDateString()}
-            </td>
+                ).toLocaleDateString()} */}
+            {/* </td> */}
             <td>{eachCohort.cohortSPOC}</td>
             <td>{eachCohort.cohortInstructor}</td>
-            <td><button type="button" className="btn btn-outline-warning" onClick={()=>handleView(eachCohort.cohortId)}><i className="bi bi-eye fs-4"></i></button></td>
-            <td><button type="button" className="btn btn-outline-primary" onClick={()=>handleEdit(eachCohort.cohortId)}><i className="bi bi-pencil-square fs-4"></i></button></td>
-            <td><button type="button" className="btn btn-outline-danger" onClick={()=>handleDelete(eachCohort.cohortId)}><i className="bi bi-trash fs-4"></i></button></td>
+            <td><button type="button" className="btn btn-outline-warning" onClick={()=>handleView(eachCohort.id)}><i className="bi bi-eye fs-4"></i></button></td>
+            <td><button type="button" className="btn btn-outline-primary" onClick={()=>handleEdit(eachCohort.id)}><i className="bi bi-pencil-square fs-4"></i></button></td>
+            <td><button type="button" className="btn btn-outline-danger" onClick={()=>handleDelete(eachCohort.id)}><i className="bi bi-trash fs-4"></i></button></td>
         </tr>
     ));
 
-    function handleView(cohortId){
-        // console.log(cohortId);
-        let getCohort = allCohorts.filter((eachCohort)=>eachCohort.cohortId==cohortId);
-        navigate("/training/cohort-view/" + cohortId ,{state:getCohort[0]});
-        // console.log(cohortId);
+    function handleView(id){
+        
+        navigate("/training copy/cohort-view-http/" + id);
+        // console.log(id);
     }
 
-    function handleEdit(){
+    function handleEdit(id){
+        navigate("/training copy/cohort-edit-http/" + id);
 
     }
 
-    function handleDelete(cohortId){
-        let filteredData=allCohorts.filter((eachCohort)=>eachCohort.cohortId!=cohortId);
-        setAllCohorts(filteredData);    
+    function handleDelete(id){
+        // let filteredData=allCohorts.filter((eachCohort)=>eachCohort.cohortId!=cohortId);
+        // setAllCohorts(filteredData); 
+        console.log(id);
+        fetch(baseUrl + "/"+ id ,{method:"DELETE"})
+        .then(res=>res.json())
+        .then(data=>loadAllCohorts());   
     }
 
     function handleSearch(event) {
@@ -129,4 +119,4 @@ function CohortList(){
     );
 }
 
-export default CohortList;
+export default CohortListHttp;

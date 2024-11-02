@@ -31,6 +31,15 @@ import HeaderTraining from './components/training/HeaderTraining'
 import VenueAdd from './components/training/venue/VenueAdd'
 import CohortView from './components/training/cohort/CohortView'
 import CohortAdd  from './components/training/cohort/CohortAdd'
+import JsonPlaceHolder from './components/JsonPlaceHolder'
+import HeaderTrainingHttp from './components/training copy/HeaderTrainingHttp'
+import VenueListHttp from './components/training copy/venue-http/VenueListHttp'
+import VenueAddHttp from './components/training copy/venue-http/VenueAddHttp'
+import CohortListHttp from './components/training copy/cohort-http/CohortListHttp'
+import CohortAddHttp from './components/training copy/cohort-http/CohortAddHttp'
+import CohortViewHttp from './components/training copy/cohort-http/CohortViewHttp'
+import CohortEditHttp from './components/training copy/cohort-http/CohortEditHttp'
+
 //import './App.css'
 
 function App() {
@@ -78,6 +87,15 @@ function App() {
         <Route path='cohort-add' element={<CohortAdd/>}></Route>
         <Route path='cohort-view/:cid' element={<CohortView/>}></Route>
       </Route>
+      <Route path='/training copy' element={<HeaderTrainingHttp/>}>
+        <Route path='venue-list-http' element={<VenueListHttp/>}></Route>
+        <Route path='venue-add-http' element={<VenueAddHttp/>}></Route>
+        <Route path='cohort-list-http' element={<CohortListHttp/>}></Route>
+        <Route path='cohort-add-http' element={<CohortAddHttp></CohortAddHttp>}></Route>
+        <Route path='cohort-edit-http/:cid' element={<CohortEditHttp/>}></Route>
+        <Route path='cohort-view-http/:cid' element={<CohortViewHttp/>}></Route>
+      </Route>
+      <Route path='/fake-api' element={<JsonPlaceHolder/>}></Route>
       <Route path="/*" element={<Error/>}></Route>
      </Routes>
      </BrowserRouter>

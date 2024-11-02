@@ -26,6 +26,14 @@ function HeaderApp(){
                         <Link to="/training" className="nav-link">Training Component</Link>
                         {/* <a href="/ecommerce" className="nav-link">Ecommerce Component</a> */}
                     </li>
+                    <li className="nav-item">
+                        <Link to="/training copy" className="nav-link">TrainingHttp Component</Link>
+                        {/* <a href="/ecommerce" className="nav-link">Ecommerce Component</a> */}
+                    </li>
+                     <li className="nav-item">
+                        <Link to="/fake-api" className="nav-link">JSON PLACEHOLDER</Link>
+                        {/* <a href="/fruit" className="nav-link">Fruit Component</a> */}
+                    </li>   
                 </ul>
 
             </div>
